@@ -9,15 +9,19 @@
 \begin{document}
 
 \title{Your Paper Title Here}
-\author{
-    Wenjie Xu\textsuperscript{a,b,*}, 
-    Second Author\textsuperscript{a}, 
-    Third Author\textsuperscript{b}\\[2pt]
-    \small\textsuperscript{a}Institutes of Science and Development, CAS, Beijing 100190, China\\
-    \small\textsuperscript{b}School of Public Policy and Management, UCAS, Beijing 100049, China\\
-    \small\textsuperscript{*}Corresponding author
-}
-\date{}
+
+%% Modular Author Configuration
+%% Usage: \authorinfo[mark]{Name}{Affiliation marks}{Email}
+%%        mark: * for corresponding author, empty otherwise
+\authorinfo[*]{Wenjie Xu}{a,b}{xuwenjie@example.edu.cn}
+\authorinfo[]{Second Author}{a}{author2@example.edu.cn}
+\authorinfo[]{Third Author}{b}{author3@example.edu.cn}
+
+%% Affiliation Configuration
+%% Usage: \affiliation{mark}{Institution}
+\affiliation{a}{Institutes of Science and Development, CAS, Beijing 100190, China}
+\affiliation{b}{School of Public Policy and Management, UCAS, Beijing 100049, China}
+
 \maketitle
 \thispagestyle{plain}
 

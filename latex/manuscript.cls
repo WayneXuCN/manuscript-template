@@ -206,15 +206,97 @@
 %% 摘要环境（保持向后兼容）
 \renewenvironment{abstract}{\par\small\noindent\textbf{\abstractname}\quad\ignorespaces}{\par\global\@afterindenttrue}
 
-%% 标题格式
+%% ============================================================
+%% 模块化作者配置系统
+%% ============================================================
+
+% 需要 etoolbox 提供更可靠的列表操作
+\RequirePackage{etoolbox}
+
+% 语言相关的通讯作者文本
+\newcommand{\ManuscriptCorrText}{%
+    \ifthenelse{\equal{\manuscript@lang}{en}}{Corresponding author}{通讯作者}%
+}
+
+% 计数器
+\newcounter{ManuscriptAuthorCount}
+\newcounter{ManuscriptAffilCount}
+\newcounter{ManuscriptCorrCount}
+
+% 存储列表
+\newcommand{\ManuscriptAuthorList}{}
+\newcommand{\ManuscriptAffilList}{}
+\newcommand{\ManuscriptCorrList}{}
+
+% 清空配置命令
+\newcommand{\clearauthors}{%
+    \renewcommand{\ManuscriptAuthorList}{}%
+    \renewcommand{\ManuscriptAffilList}{}%
+    \renewcommand{\ManuscriptCorrList}{}%
+    \setcounter{ManuscriptAuthorCount}{0}%
+    \setcounter{ManuscriptAffilCount}{0}%
+    \setcounter{ManuscriptCorrCount}{0}%
+}
+
+% 添加单位
+% 用法: \affiliation{标记}{单位名称}
+\newcommand{\affiliation}[2]{%
+    \stepcounter{ManuscriptAffilCount}%
+    \appto\ManuscriptAffilList{\small\textsuperscript{#1}#2\\}%
+}
+
+% 添加作者
+% 用法: \authorinfo[标记]{姓名}{单位标记}{邮箱}
+% 标记: * 表示通讯作者
+\newcommand{\authorinfo}[4][]{%
+    \stepcounter{ManuscriptAuthorCount}%
+    % 添加到作者列表
+    \ifnum\value{ManuscriptAuthorCount}>1
+        \appto\ManuscriptAuthorList{, }%
+    \fi
+    \appto\ManuscriptAuthorList{#2}%
+    \ifx\relax#3\relax\else
+        \appto\ManuscriptAuthorList{\textsuperscript{#3}}%
+    \fi
+    \ifx\relax#1\relax\else
+        \appto\ManuscriptAuthorList{\textsuperscript{#1}}%
+    \fi
+    % 如果是通讯作者，添加到脚注列表
+    \ifx\relax#1\relax\else
+        \ifnum\value{ManuscriptCorrCount}>0
+            \appto\ManuscriptCorrList{; }%
+        \fi
+        \stepcounter{ManuscriptCorrCount}%
+        \appto\ManuscriptCorrList{\textsuperscript{#1}\ManuscriptCorrText: \href{mailto:#4}{#4}}%
+    \fi
+}
+
+% 生成作者块
+\newcommand{\makeauthorblock}{%
+    \ManuscriptAuthorList\\[4pt]%
+    \ManuscriptAffilList%
+}
+
+% 生成脚注
+\newcommand{\makeauthorfootnote}{%
+    \ifx\ManuscriptCorrList\empty\else
+        \begingroup
+            \renewcommand{\thefootnote}{}%
+            \footnote{\ManuscriptCorrList}%
+        \endgroup
+    \fi
+}
+
+% 标题生成
 \renewcommand{\maketitle}{%
     \begingroup
         \centering
-        {\Large\bfseries \@title\par}
+        {\Large\bfseries\@title\par}
         \vspace{0.8em}
-        {\normalsize \@author\par}
+        {\normalsize\makeauthorblock\par}%
     \endgroup
-    \vspace{0.8em}
+    \vspace{0.8em}%
+    \makeauthorfootnote
 }
 
 \endinput

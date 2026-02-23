@@ -12,15 +12,19 @@
 \begin{document}
 
 \title{论文标题}
-\author{
-    徐文杰\textsuperscript{a,b,*}, 
-    第二作者\textsuperscript{a}, 
-    第三作者\textsuperscript{b}\\[2pt]
-    \small\textsuperscript{a}中国科学院科技战略咨询研究院，北京 100190\\
-    \small\textsuperscript{b}中国科学院大学公共政策与管理学院，北京 100049\\
-    \small\textsuperscript{*}通讯作者
-}
-\date{}
+
+%% 模块化作者配置
+%% 用法: \authorinfo[标记]{姓名}{单位标记}{邮箱}
+%%       标记: * 表示通讯作者，空表示非通讯作者
+\authorinfo[*]{徐文杰}{a,b}{xuwenjie@example.edu.cn}
+\authorinfo[]{第二作者}{a}{author2@example.edu.cn}
+\authorinfo[]{第三作者}{b}{author3@example.edu.cn}
+
+%% 单位配置
+%% 用法: \affiliation{标记}{单位名称}
+\affiliation{a}{中国科学院科技战略咨询研究院，北京 100190}
+\affiliation{b}{中国科学院大学公共政策与管理学院，北京 100049}
+
 \maketitle
 \thispagestyle{plain}
 
