@@ -1,34 +1,134 @@
-%% English Academic Paper Template
-%% Compile: xelatex template-en.tex
+%% ============================================================================
+%% English Academic Paper LaTeX Template
+%% Compilation: xelatex template-en.tex
+%% Dependencies: Requires XeLaTeX and the following fonts:
+%%               - Times New Roman (Western font)
+%%               - Source Han Serif/Heiti or system default Chinese fonts
+%% ============================================================================
 
+%% ----------------------------------------------------------------------------
+%% Document Class Settings
+%% ----------------------------------------------------------------------------
+%% \documentclass[options]{manuscript}
+%% Available Options:
+%%   - Fontset: macnew (macOS default), windows, fandol (open source), ubuntu
+%%   - Language: cn (Chinese), en (English)
+%%   - Layout: twocolumn (two-column layout), review (review mode, double spacing)
+%% Example: \documentclass[macnew, en, twocolumn]{manuscript}
+%% ----------------------------------------------------------------------------
 \documentclass[macnew, en]{manuscript}
 
+%% ----------------------------------------------------------------------------
+%% Western Font Configuration
+%% ----------------------------------------------------------------------------
+%% \setmainfont{font name} sets the main text font (serif)
+%% Common Choices:
+%%   - Times New Roman (academic standard)
+%%   - TeX Gyre Termes (open source alternative to Times)
+%%   - Latin Modern Roman
+%% \setsansfont{font name} sets the sans-serif font (for headings)
+%% \setmonofont{font name} sets the monospace font (for code)
+%% ----------------------------------------------------------------------------
 \setmainfont{Times New Roman}
-\hypersetup{pdftitle={Paper Title}, pdfauthor={Author Name}}
 
+%% ----------------------------------------------------------------------------
+%% PDF Metadata Configuration
+%% ----------------------------------------------------------------------------
+%% Set PDF document properties for better indexing and management
+%% Common Fields:
+%%   - pdftitle: Paper title (displayed in PDF properties)
+%%   - pdfauthor: Author name(s)
+%%   - pdfsubject: Paper subject
+%%   - pdfkeywords: Keywords
+%% ----------------------------------------------------------------------------
+\hypersetup{
+    pdftitle={Paper Title},
+    pdfauthor={Author Name}
+}
+
+%% ----------------------------------------------------------------------------
+%% Document Body Begins
+%% ----------------------------------------------------------------------------
 \begin{document}
 
+%% ----------------------------------------------------------------------------
+%% Paper Title
+%% ----------------------------------------------------------------------------
+%% \title{title content}
+%% Supports \thanks{} for footnotes, but the \authorinfo system below is recommended
+%% ----------------------------------------------------------------------------
 \title{Your Paper Title Here}
 
-%% Modular Author Configuration
-%% Usage: \authorinfo[mark]{Name}{Affiliation marks}{Email}
-%%        mark: * for corresponding author, empty otherwise
+%% ----------------------------------------------------------------------------
+%% Author Information Configuration (Modular System)
+%% ----------------------------------------------------------------------------
+%% Usage: \authorinfo[corresponding mark]{Name}{Affiliation marks}{Email}
+%% Parameters:
+%%   - [corresponding mark]: Optional, * indicates corresponding author (auto footnote)
+%%   - Name: Author's name
+%%   - Affiliation marks: Letter identifiers for affiliations, comma-separated for multiple, e.g., {a,b}
+%%   - Email: Email address
+%%
+%% Examples:
+%%   \authorinfo[*]{John Smith}{a}{john@example.edu}      % Corresponding author
+%%   \authorinfo[]{Jane Doe}{a,b}{jane@example.edu}       % Non-corresponding, two affiliations
+%%   \authorinfo[]{Bob Wilson}{b}{bob@example.edu}        % Non-corresponding, one affiliation
+%% ----------------------------------------------------------------------------
 \authorinfo[*]{Wenjie Xu}{a,b}{xuwenjie@example.edu.cn}
 \authorinfo[]{Second Author}{a}{author2@example.edu.cn}
 \authorinfo[]{Third Author}{b}{author3@example.edu.cn}
 
+%% ----------------------------------------------------------------------------
 %% Affiliation Configuration
-%% Usage: \affiliation{mark}{Institution}
+%% ----------------------------------------------------------------------------
+%% Usage: \affiliation{mark}{Institution name}
+%% Parameters:
+%%   - mark: Matches the affiliation marks in author configuration
+%%   - Institution name: Full institution name and address
+%%
+%% Note: Mark order does not affect display order; alphabetical definition recommended
+%% ----------------------------------------------------------------------------
 \affiliation{a}{Institutes of Science and Development, CAS, Beijing 100190, China}
 \affiliation{b}{School of Public Policy and Management, UCAS, Beijing 100049, China}
 
+%% ----------------------------------------------------------------------------
+%% Generate Title and Author Information
+%% ----------------------------------------------------------------------------
+%% \maketitle must be placed after all title and author information
+%% \thispagestyle{plain} removes header on first page, keeps page number
+%% ----------------------------------------------------------------------------
 \maketitle
 \thispagestyle{plain}
 
+%% ----------------------------------------------------------------------------
+%% Abstract and Keywords
+%% ----------------------------------------------------------------------------
+%% Use \Abstract{} command for the abstract
+%% Abstract Requirements:
+%%   - Briefly summarize research background, methods, results, and conclusions
+%%   - Typically 150--250 words
+%%   - No figures, tables, formulas, or citations
+%%
+%% Use \Keywords{} command for keywords
+%% Format Requirements:
+%%   - 3--5 keywords
+%%   - Separated by semicolons (;)
+%%   - English keywords should correspond to Chinese ones if applicable
+%% ----------------------------------------------------------------------------
 \Abstract{Write your abstract here. The abstract should briefly summarize the main contributions, 
 methodology, and results of your paper. Keep it concise and informative, typically within 150--250 words.}
 
 \Keywords{Keyword 1; Keyword 2; Keyword 3; Keyword 4}
+
+%% ----------------------------------------------------------------------------
+%% Main Body Begins
+%% ----------------------------------------------------------------------------
+%% Sections are automatically numbered; use \label{} to set cross-reference labels
+%% Reference Methods:
+%%   - \cref{label}: Smart reference (recommended, auto-adds "Section X/Fig.X/Table X" prefix)
+%%   - \ref{label}: Number only
+%%   - \pageref{label}: Page number
+%% ----------------------------------------------------------------------------
 
 \section{Introduction}
 \label{sec:intro}
@@ -37,6 +137,14 @@ Write your introduction here. Provide background context, state the research pro
 and outline the paper structure \cite{example2023paper}.
 
 The main contributions of this paper include:
+%% ----------------------------------------------------------------------------
+%% Itemize Environment
+%% ----------------------------------------------------------------------------
+%% Available Options:
+%%   - label: Custom item symbol, e.g., label=$\bullet$, label=\ding{108}
+%%   - leftmargin: Adjust left margin
+%%   - nosep: Compact mode (set by default)
+%% ----------------------------------------------------------------------------
 \begin{itemize}
     \item Contribution 1
     \item Contribution 2
@@ -56,11 +164,34 @@ Review relevant literature and position your work.
 
 Describe the problem formulation. Key equations should be numbered:
 
+%% ----------------------------------------------------------------------------
+%% Math Environments
+%% ----------------------------------------------------------------------------
+%% equation environment: Numbered single-line equation
+%% align environment: Multi-line aligned equations, use & to specify alignment position
+%% gather environment: Multi-line centered equations
+%% \[ ... \] or displaymath environment: Unnumbered equations
+%% ----------------------------------------------------------------------------
 \begin{equation}
     f(x) = \sum_{i=1}^{n} \alpha_i \cdot g_i(x)
     \label{eq:example}
 \end{equation}
 
+%% ----------------------------------------------------------------------------
+%% Theorem-like Environments
+%% ----------------------------------------------------------------------------
+%% Available Environments:
+%%   - theorem: Theorem
+%%   - lemma: Lemma
+%%   - proposition: Proposition
+%%   - corollary: Corollary
+%%   - definition: Definition
+%%   - example: Example
+%%   - assumption: Assumption
+%%   - remark: Remark
+%%
+%% Usage: \begin{environment}[optional title] ... \end{environment}
+%% ----------------------------------------------------------------------------
 \begin{definition}[Term Name]
     Provide the definition here.
 \end{definition}
@@ -76,6 +207,20 @@ Describe the problem formulation. Key equations should be numbered:
 \subsection{Algorithm}
 \label{subsec:algorithm}
 
+%% ----------------------------------------------------------------------------
+%% Algorithm Pseudocode Environment
+%% ----------------------------------------------------------------------------
+%% From algorithm2e package
+%% Common Commands:
+%%   - \KwIn{input} / \KwOut{output}: Input/Output description
+%%   - \For{condition}{operation}: for loop
+%%   - \While{condition}{operation}: while loop
+%%   - \If{condition}{operation}: conditional
+%%   - \Return{value}: Return value
+%%   - \\ or \; for line breaks
+%%
+%% Position Parameters: [t] = top, [b] = bottom, [h] = here
+%% ----------------------------------------------------------------------------
 \begin{algorithm}[t]
     \KwIn{Input parameters}
     \KwOut{Output result}
@@ -86,6 +231,7 @@ Describe the problem formulation. Key equations should be numbered:
     \label{alg:example}
 \end{algorithm}
 
+%% Use \cref for smart reference, automatically adds "Algorithm" prefix
 \Cref{alg:example} shows the main algorithm workflow.
 
 \section{Experiments}
@@ -96,6 +242,20 @@ Describe the problem formulation. Key equations should be numbered:
 
 Describe datasets, baseline methods, and evaluation metrics.
 
+%% ----------------------------------------------------------------------------
+%% Table Environment
+%% ----------------------------------------------------------------------------
+%% Recommended Combination: tabular + booktabs (three-line table style)
+%% Common Commands:
+%%   - \toprule: Top thick line
+%%   - \midrule: Middle thin line
+%%   - \bottomrule: Bottom thick line
+%%   - \cmidrule{l-r}: Partial horizontal line
+%%   - l/c/r: Column alignment (left/center/right)
+%%   - p{width}: Fixed width column with automatic line breaks
+%%
+%% Position Parameters: [t] = top, [b] = bottom, [h] = here, [!htbp] = force priority
+%% ----------------------------------------------------------------------------
 \begin{table}[t]
     \centering
     \caption{Dataset Statistics}
@@ -114,6 +274,13 @@ Describe datasets, baseline methods, and evaluation metrics.
 \subsection{Results}
 \label{subsec:results}
 
+%% ----------------------------------------------------------------------------
+%% Table Formatting
+%% ----------------------------------------------------------------------------
+%% Text bold: \textbf{text}
+%% Math bold: \mathbf{symbol} or \bm{symbol} (requires bm package)
+%% Best results are usually shown in bold
+%% ----------------------------------------------------------------------------
 \begin{table}[t]
     \centering
     \caption{Performance Comparison}
@@ -129,6 +296,7 @@ Describe datasets, baseline methods, and evaluation metrics.
     \end{tabular}
 \end{table}
 
+%% Reference table
 \Cref{tab:results} shows the comparison results. Our method outperforms all baselines.
 
 \section{Conclusion}
@@ -136,6 +304,23 @@ Describe datasets, baseline methods, and evaluation metrics.
 
 Summarize the main findings and discuss future work directions.
 
+%% ----------------------------------------------------------------------------
+%% References
+%% ----------------------------------------------------------------------------
+%% \bibliographystyle{style} sets the bibliography style
+%% Common styles (with natbib):
+%%   - plainnat   : numbered by citation order, author-year format
+%%   - abbrvnat   : abbreviated author names
+%%   - unsrtnat   : unsorted, by appearance order
+%%
+%% \bibliography{filename} loads the .bib file
+%% Do not include file extension
+%% Citation Commands:
+%%   - \cite{key}: Basic citation [1]
+%%   - \citep{key}: Parenthetical citation (Author, Year) - requires natbib
+%%   - \citet{key}: Textual citation Author (Year) - requires natbib
+%% ----------------------------------------------------------------------------
+\bibliographystyle{plainnat}
 \bibliography{references}
 
 \end{document}
