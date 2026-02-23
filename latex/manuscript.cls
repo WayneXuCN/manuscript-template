@@ -193,7 +193,17 @@
 \newcommand{\keywords}[1]{\par\noindent\textbf{\keywordstext: }#1\par}
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
 
-%% 摘要环境
+%% 独立摘要命令 \Abstract{内容}
+\newcommand{\Abstract}[1]{%
+    \par\small\noindent\textbf{\abstractname}\quad#1\par\global\@afterindenttrue%
+}
+
+%% 独立关键词命令 \Keywords{内容}
+\newcommand{\Keywords}[1]{%
+    \par\small\noindent\textbf{\keywordstext: }#1\par\global\@afterindenttrue%
+}
+
+%% 摘要环境（保持向后兼容）
 \renewenvironment{abstract}{\par\small\noindent\textbf{\abstractname}\quad\ignorespaces}{\par\global\@afterindenttrue}
 
 %% 标题格式
