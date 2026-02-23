@@ -29,6 +29,42 @@ cd latex
 xelatex template-en.tex
 ```
 
+### Word 导出（一键转换）
+
+本模板支持使用 Pandoc 将 LaTeX 一键导出为 Word，**固定格式、保留参考文献、使用 Word 原生公式**。
+
+**前置要求**：安装 [Pandoc](https://pandoc.org/)
+```bash
+brew install pandoc
+```
+
+**快速导出**：
+```bash
+cd latex
+make word-cn    # 导出中文模板
+make word-en    # 导出英文模板
+```
+
+**固定格式配置**（推荐）：
+
+1. 用 Microsoft Word 打开 `latex/wordTemplate.docx`
+2. 修改样式（字体、字号、行距、段落间距等）
+3. 另存为 `latex/wordTemplate.docx`
+4. 运行 `make word-cn`，导出的 Word 将自动应用预设样式
+
+**特性**：
+- ✅ 参考文献自动处理（`--citeproc`）
+- ✅ Word 原生公式（可编辑，使用 `--mathml`）
+- ✅ 自定义样式模板（通过 `wordTemplate.docx` 固定格式）
+- ✅ 图片自动提取到 `./media` 文件夹
+
+**更多选项**：
+```bash
+make word-basic-cn   # 基础导出（无自定义样式）
+make ref-doc         # 生成默认样式模板
+make help            # 查看所有命令
+```
+
 ### 文档类选项
 
 | 选项 | 说明 |
