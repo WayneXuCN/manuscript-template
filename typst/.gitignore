@@ -1,0 +1,24 @@
+# Typst 输出文件
+*.pdf
+
+# Typst 缓存和临时文件（通常存储在用户目录的缓存中，但项目级临时文件可能在这里）
+*.typst-cache/
+.typst/
+
+# 通用临时文件
+*.tmp
+*.bak
+*~
+
+# macOS 系统文件
+.DS_Store
+._*
+
+# 编辑器临时文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 备份文件
+*.backup

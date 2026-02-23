@@ -1,0 +1,141 @@
+%% 中文学术论文模板
+%% 编译: xelatex template-cn.tex
+
+\documentclass[macnew, cn]{manuscript}
+
+%% 西文字体
+\setmainfont{Times New Roman}
+
+%% PDF 元数据
+\hypersetup{pdftitle={论文标题}, pdfauthor={作者姓名}}
+
+\begin{document}
+
+\title{论文标题}
+\author{
+    徐文杰\textsuperscript{a,b,*}, 
+    第二作者\textsuperscript{a}, 
+    第三作者\textsuperscript{b}\\[2pt]
+    \small\textsuperscript{a}中国科学院科技战略咨询研究院，北京 100190\\
+    \small\textsuperscript{b}中国科学院大学公共政策与管理学院，北京 100049\\
+    \small\textsuperscript{*}通讯作者
+}
+\date{}
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+    在此撰写摘要。摘要应简要概括论文的主要贡献、方法和结果，通常在 150--250 字之间。
+    \keywords{关键词 1; 关键词 2; 关键词 3; 关键词 4}
+\end{abstract}
+
+\section{引言}
+\label{sec:intro}
+
+在此撰写引言部分。介绍研究背景、问题描述和论文结构 \cite{example2023paper}。
+
+本模板支持中英文混排（Chinese and English mixed typesetting），数学公式和术语可以自然切换。
+
+主要贡献包括：
+\begin{itemize}
+    \item 贡献 1
+    \item 贡献 2
+    \item 贡献 3
+\end{itemize}
+
+\section{相关工作}
+\label{sec:related}
+
+综述相关文献，将你的工作定位在现有研究中。
+
+\section{方法}
+\label{sec:method}
+
+\subsection{问题建模}
+\label{subsec:formulation}
+
+描述问题建模。关键公式应编号：
+
+\begin{equation}
+    f(x) = \sum_{i=1}^{n} \alpha_i \cdot g_i(x)
+    \label{eq:example}
+\end{equation}
+
+\begin{definition}[术语名称]
+    在此给出定义。
+\end{definition}
+
+\begin{theorem}[定理名称]
+    在此陈述定理内容。
+\end{theorem}
+
+\begin{lemma}[引理名称]
+    在此陈述引理内容。
+\end{lemma}
+
+\subsection{算法}
+\label{subsec:algorithm}
+
+\begin{algorithm}[t]
+    \KwIn{输入参数}
+    \KwOut{输出结果}
+    步骤 1 描述\\
+    \For{每次迭代}{更新步骤}
+    \Return{最终结果}
+    \caption{算法名称}
+    \label{alg:example}
+\end{algorithm}
+
+\cref{alg:example} 展示了主要算法流程。
+
+\section{实验}
+\label{sec:exp}
+
+\subsection{实验设置}
+\label{subsec:setup}
+
+描述数据集、基线方法和评价指标。
+
+\begin{table}[t]
+    \centering
+    \caption{数据集统计}
+    \label{tab:data}
+    \begin{tabular}{lcc}
+        \toprule
+        指标 & 数据集 A & 数据集 B \\
+        \midrule
+        样本数 & XXX & XXX \\
+        特征数 & XXX & XXX \\
+        类别数 & XXX & XXX \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{实验结果}
+\label{subsec:results}
+
+\begin{table}[t]
+    \centering
+    \caption{性能对比}
+    \label{tab:results}
+    \begin{tabular}{lccc}
+        \toprule
+        方法 & 指标 1 & 指标 2 & 指标 3 \\
+        \midrule
+        基线 1 & XX.X & XX.X & XX.X \\
+        基线 2 & XX.X & XX.X & XX.X \\
+        \textbf{本文方法} & \textbf{XX.X} & \textbf{XX.X} & \textbf{XX.X} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\cref{tab:results} 展示了对比结果。结果表明本文方法优于所有基线方法。
+
+\section{结论}
+\label{sec:conclusion}
+
+总结主要发现并讨论未来工作方向。
+
+\bibliography{references}
+
+\end{document}

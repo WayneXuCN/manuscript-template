@@ -1,0 +1,40 @@
+# LaTeX 辅助文件和输出
+*.aux
+*.log
+*.out
+*.toc
+
+# 参考文献相关
+*.bbl
+*.blg
+
+# 索引和词汇表
+*.idx
+*.ind
+*.glo
+*.gls
+*.lot
+*.lof
+
+# SyncTeX 和编译缓存
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# 临时文件
+*.tmp
+*.bak
+*~
+
+# PDF 输出（可选，如需版本控制请注释掉）
+# *.pdf
+
+# macOS 系统文件
+.DS_Store
+._*
+
+# 编辑器临时文件
+.vscode/
+.idea/
+*.swp
+*.swo

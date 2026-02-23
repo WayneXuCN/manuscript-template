@@ -1,0 +1,138 @@
+%% English Academic Paper Template
+%% Compile: xelatex template-en.tex
+
+\documentclass[macnew, en]{manuscript}
+
+\setmainfont{Times New Roman}
+\hypersetup{pdftitle={Paper Title}, pdfauthor={Author Name}}
+
+\begin{document}
+
+\title{Your Paper Title Here}
+\author{
+    Wenjie Xu\textsuperscript{a,b,*}, 
+    Second Author\textsuperscript{a}, 
+    Third Author\textsuperscript{b}\\[2pt]
+    \small\textsuperscript{a}Institutes of Science and Development, CAS, Beijing 100190, China\\
+    \small\textsuperscript{b}School of Public Policy and Management, UCAS, Beijing 100049, China\\
+    \small\textsuperscript{*}Corresponding author
+}
+\date{}
+\maketitle
+\thispagestyle{plain}
+
+\begin{abstract}
+    Write your abstract here. The abstract should briefly summarize the main contributions, 
+    methodology, and results of your paper. Keep it concise and informative, typically within 150--250 words.
+    \keywords{Keyword 1; Keyword 2; Keyword 3; Keyword 4}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Write your introduction here. Provide background context, state the research problem, 
+and outline the paper structure \cite{example2023paper}.
+
+The main contributions of this paper include:
+\begin{itemize}
+    \item Contribution 1
+    \item Contribution 2
+    \item Contribution 3
+\end{itemize}
+
+\section{Related Work}
+\label{sec:related}
+
+Review relevant literature and position your work.
+
+\section{Methodology}
+\label{sec:method}
+
+\subsection{Problem Formulation}
+\label{subsec:formulation}
+
+Describe the problem formulation. Key equations should be numbered:
+
+\begin{equation}
+    f(x) = \sum_{i=1}^{n} \alpha_i \cdot g_i(x)
+    \label{eq:example}
+\end{equation}
+
+\begin{definition}[Term Name]
+    Provide the definition here.
+\end{definition}
+
+\begin{theorem}[Theorem Name]
+    State the theorem here.
+\end{theorem}
+
+\begin{lemma}[Lemma Name]
+    State the lemma here.
+\end{lemma}
+
+\subsection{Algorithm}
+\label{subsec:algorithm}
+
+\begin{algorithm}[t]
+    \KwIn{Input parameters}
+    \KwOut{Output result}
+    Step 1 description\\
+    \For{each iteration}{Update step}
+    \Return{Final result}
+    \caption{Algorithm Name}
+    \label{alg:example}
+\end{algorithm}
+
+\Cref{alg:example} shows the main algorithm workflow.
+
+\section{Experiments}
+\label{sec:exp}
+
+\subsection{Experimental Setup}
+\label{subsec:setup}
+
+Describe datasets, baseline methods, and evaluation metrics.
+
+\begin{table}[t]
+    \centering
+    \caption{Dataset Statistics}
+    \label{tab:data}
+    \begin{tabular}{lcc}
+        \toprule
+        Metric & Dataset A & Dataset B \\
+        \midrule
+        Samples & XXX & XXX \\
+        Features & XXX & XXX \\
+        Classes & XXX & XXX \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Results}
+\label{subsec:results}
+
+\begin{table}[t]
+    \centering
+    \caption{Performance Comparison}
+    \label{tab:results}
+    \begin{tabular}{lccc}
+        \toprule
+        Method & Metric 1 & Metric 2 & Metric 3 \\
+        \midrule
+        Baseline 1 & XX.X & XX.X & XX.X \\
+        Baseline 2 & XX.X & XX.X & XX.X \\
+        \textbf{Ours} & \textbf{XX.X} & \textbf{XX.X} & \textbf{XX.X} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\Cref{tab:results} shows the comparison results. Our method outperforms all baselines.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Summarize the main findings and discuss future work directions.
+
+\bibliography{references}
+
+\end{document}
