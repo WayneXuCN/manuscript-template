@@ -305,6 +305,97 @@ Describe datasets, baseline methods, and evaluation metrics.
 Summarize the main findings and discuss future work directions.
 
 %% ----------------------------------------------------------------------------
+%% Appendix
+%% ----------------------------------------------------------------------------
+%% Use \appendix command to start the appendix section
+%% Sections are automatically numbered as A, B, C..., subsections as A.1, A.2...
+%%
+%% Notes:
+%%   - Place \appendix after all main body sections
+%%   - Use \section for each appendix
+%%   - \subsection and \subsubsection still work within appendices
+%%   - Default prefix is "Appendix" (English) or "附录" (Chinese)
+%% ----------------------------------------------------------------------------
+\appendix
+
+\section{Supplementary Proofs}
+\label{app:proof}
+
+This section provides detailed proofs for the theorems presented in the main text.
+
+\subsection{Detailed Proof of Theorem 1}
+
+\begin{theorem}[Convergence Theorem]
+\label{thm:convergence}
+    Assume the objective function $f(x)$ is $L$-smooth, and the learning rate $\eta \leq \frac{1}{L}$. Then Algorithm 1 guarantees convergence after $T$ iterations:
+    \begin{equation}
+        \min_{t \in [T]} \|\nabla f(x_t)\|^2 \leq \frac{2(f(x_0) - f^*)}{\eta T}
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    By the definition of $L$-smoothness, for any $x, y$ we have:
+    \begin{equation}
+        f(y) \leq f(x) + \nabla f(x)^\top(y-x) + \frac{L}{2}\|y-x\|^2
+    \end{equation}
+    
+    Let $y = x_{t+1} = x_t - \eta \nabla f(x_t)$, substituting into the above inequality:
+    \begin{align}
+        f(x_{t+1}) &\leq f(x_t) - \eta \|\nabla f(x_t)\|^2 + \frac{L\eta^2}{2}\|\nabla f(x_t)\|^2 \\
+        &= f(x_t) - \eta\left(1 - \frac{L\eta}{2}\right)\|\nabla f(x_t)\|^2
+    \end{align}
+    
+    When $\eta \leq \frac{1}{L}$, we have $1 - \frac{L\eta}{2} \geq \frac{1}{2}$, therefore:
+    \begin{equation}
+        f(x_{t+1}) \leq f(x_t) - \frac{\eta}{2}\|\nabla f(x_t)\|^2
+    \end{equation}
+    
+    Summing over $t = 0, 1, \ldots, T-1$:
+    \begin{equation}
+        f(x_T) \leq f(x_0) - \frac{\eta}{2}\sum_{t=0}^{T-1}\|\nabla f(x_t)\|^2
+    \end{equation}
+    
+    Rearranging and noting that $f(x_T) \geq f^*$ completes the proof.
+\end{proof}
+
+\section{Additional Experiments}
+\label{app:experiment}
+
+\subsection{Performance Comparison on Different Datasets}
+
+\cref{tab:appendix-results} presents detailed performance comparisons of our method across multiple public datasets.
+
+\begin{table}[h]
+    \centering
+    \caption{Performance comparison across datasets (Accuracy \%)}
+    \label{tab:appendix-results}
+    \begin{tabular}{lcccc}
+        \toprule
+        Method & CIFAR-10 & CIFAR-100 & ImageNet & Average \\
+        \midrule
+        ResNet-50 & 94.2 & 74.5 & 76.1 & 81.6 \\
+        ResNet-101 & 95.1 & 77.3 & 78.5 & 83.6 \\
+        ViT-B/16 & 96.2 & 81.4 & 80.2 & 85.9 \\
+        \textbf{Ours} & \textbf{97.1} & \textbf{83.2} & \textbf{82.8} & \textbf{87.7} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Hyperparameter Sensitivity Analysis}
+
+We conducted sensitivity analysis for key hyperparameters. \cref{fig:hyperparam} shows the impact of different learning rates and batch sizes on model performance.
+
+%% Example: Code framework for inserting figures (requires image files)
+%% \begin{figure}[h]
+%%     \centering
+%%     \includegraphics[width=0.8\textwidth]{figures/hyperparam_analysis.pdf}
+%%     \caption{Hyperparameter sensitivity analysis}
+%%     \label{fig:hyperparam}
+%% \end{figure}
+
+The experimental results demonstrate that the model performance remains relatively stable when the learning rate is in the range $[10^{-4}, 10^{-3}]$ and the batch size is in $[32, 128]$.
+
+%% ----------------------------------------------------------------------------
 %% References
 %% ----------------------------------------------------------------------------
 %% \bibliographystyle{style} sets the bibliography style

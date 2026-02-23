@@ -305,6 +305,97 @@
 总结主要发现并讨论未来工作方向。
 
 %% ----------------------------------------------------------------------------
+%% 附录
+%% ----------------------------------------------------------------------------
+%% 使用 \appendix 命令开启附录部分
+%% 此后章节自动编号为 A, B, C...，子章节为 A.1, A.2...
+%%
+%% 注意事项:
+%%   - \appendix 命令应放在所有正文章节之后
+%%   - 每个附录使用 \section 开始
+%%   - 附录内部仍可使用 \subsection 和 \subsubsection
+%%   - 附录标题前缀默认为"附录"（中文）或"Appendix"（英文）
+%% ----------------------------------------------------------------------------
+\appendix
+
+\section{补充证明}
+\label{app:proof}
+
+本节提供文中定理的详细证明过程。
+
+\subsection{定理 1 的详细证明}
+
+\begin{theorem}[收敛性定理]
+\label{thm:convergence}
+    假设目标函数 $f(x)$ 满足 $L$-光滑条件，且学习率 $\eta \leq \frac{1}{L}$，则算法 1 保证在 $T$ 次迭代后收敛：
+    \begin{equation}
+        \min_{t \in [T]} \|\nabla f(x_t)\|^2 \leq \frac{2(f(x_0) - f^*)}{\eta T}
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    根据 $L$-光滑性的定义，对于任意 $x, y$ 有：
+    \begin{equation}
+        f(y) \leq f(x) + \nabla f(x)^\top(y-x) + \frac{L}{2}\|y-x\|^2
+    \end{equation}
+    
+    令 $y = x_{t+1} = x_t - \eta \nabla f(x_t)$，代入上式得：
+    \begin{align}
+        f(x_{t+1}) &\leq f(x_t) - \eta \|\nabla f(x_t)\|^2 + \frac{L\eta^2}{2}\|\nabla f(x_t)\|^2 \\
+        &= f(x_t) - \eta\left(1 - \frac{L\eta}{2}\right)\|\nabla f(x_t)\|^2
+    \end{align}
+    
+    当 $\eta \leq \frac{1}{L}$ 时，$1 - \frac{L\eta}{2} \geq \frac{1}{2}$，因此：
+    \begin{equation}
+        f(x_{t+1}) \leq f(x_t) - \frac{\eta}{2}\|\nabla f(x_t)\|^2
+    \end{equation}
+    
+    对 $t = 0, 1, \ldots, T-1$ 求和：
+    \begin{equation}
+        f(x_T) \leq f(x_0) - \frac{\eta}{2}\sum_{t=0}^{T-1}\|\nabla f(x_t)\|^2
+    \end{equation}
+    
+    整理并注意到 $f(x_T) \geq f^*$，即得证。
+\end{proof}
+
+\section{补充实验}
+\label{app:experiment}
+
+\subsection{在不同数据集上的性能对比}
+
+\cref{tab:appendix-results} 展示了本文方法在多个公开数据集上的详细性能对比。
+
+\begin{table}[h]
+    \centering
+    \caption{不同数据集上的性能对比（准确率 \%）}
+    \label{tab:appendix-results}
+    \begin{tabular}{lcccc}
+        \toprule
+        方法 & CIFAR-10 & CIFAR-100 & ImageNet & 平均 \\
+        \midrule
+        ResNet-50 & 94.2 & 74.5 & 76.1 & 81.6 \\
+        ResNet-101 & 95.1 & 77.3 & 78.5 & 83.6 \\
+        ViT-B/16 & 96.2 & 81.4 & 80.2 & 85.9 \\
+        \textbf{本文方法} & \textbf{97.1} & \textbf{83.2} & \textbf{82.8} & \textbf{87.7} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{超参数敏感性分析}
+
+我们对关键超参数进行了敏感性分析。\cref{fig:hyperparam} 展示了不同学习率和批量大小对模型性能的影响。
+
+%% 示例：插入图片的代码框架（需要准备图片文件）
+%% \begin{figure}[h]
+%%     \centering
+%%     \includegraphics[width=0.8\textwidth]{figures/hyperparam_analysis.pdf}
+%%     \caption{超参数敏感性分析}
+%%     \label{fig:hyperparam}
+%% \end{figure}
+
+实验结果表明，当学习率在 $[10^{-4}, 10^{-3}]$ 范围内，批量大小在 $[32, 128]$ 范围内时，模型性能相对稳定。
+
+%% ----------------------------------------------------------------------------
 %% 参考文献
 %% ----------------------------------------------------------------------------
 %% \bibliographystyle{样式名} 设置参考文献样式

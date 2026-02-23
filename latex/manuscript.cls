@@ -321,6 +321,55 @@
 }
 
 %% ----------------------------------------------------------------------------
+%% 附录样式配置
+%% ----------------------------------------------------------------------------
+%% 使用 \appendix 命令后，章节编号自动变为 A, B, C...
+%% 本配置定义附录的标题格式和编号样式
+%%
+%% 配置说明:
+%%   - 附录章节编号: A, B, C... (由 \thesection 自动处理)
+%%   - 标题格式: 与正文章节一致，可独立修改
+%%   - 支持多级附录: \subsection 变为 A.1, A.2...
+%%
+%% 使用方法:
+%%   \appendix
+%%   \section{附录标题}     % 显示为: 附录 A  附录标题
+%%   \subsection{子附录}    % 显示为: A.1  子附录
+%%
+%% 如需更改附录标题前缀（如改为"Appendix"）:
+%%   \renewcommand{\appendixname}{Appendix}  % 英文模式
+%%   \renewcommand{\appendixname}{附录}      % 中文模式（已默认）
+%% ----------------------------------------------------------------------------
+
+%% 定义附录名称（根据语言自动设置）
+\ifthenelse{\equal{\manuscript@lang}{en}}{%
+    \renewcommand{\appendixname}{Appendix}
+}{%
+    \renewcommand{\appendixname}{附录}
+}
+
+%% 附录章节标题格式（与正文一致，可独立调整）
+%% 使用 \appendix 后，\thesection 自动变为 A, B, C...
+\let\oldappendix\appendix
+\renewcommand{\appendix}{%
+    \oldappendix
+    %% 附录章节标题格式
+    \titleformat{\section}{\large\bfseries}{\appendixname~\thesection}{1em}{}
+    %% 附录二级标题格式 (A.1, A.2...)
+    \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+    %% 附录三级标题格式 (A.1.1, A.1.2...)
+    \titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+    %% 重置章节编号
+    \setcounter{section}{0}
+    \setcounter{subsection}{0}
+    \setcounter{subsubsection}{0}
+    %% 重新定义 section 的计数器输出格式为大写字母
+    \renewcommand{\thesection}{\Alph{section}}
+    \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+    \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+}
+
+%% ----------------------------------------------------------------------------
 %% 图表管理
 %% ----------------------------------------------------------------------------
 %% 加载的宏包:
