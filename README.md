@@ -8,16 +8,15 @@ XeLaTeX / Typst 学术论文模板（初稿），支持中英混排
 ├── latex/                    # LaTeX 版本
 │   ├── manuscript.cls        # 样式文件
 │   ├── references.bib        # 参考文献数据库
+│   ├── wordTemplate.docx     # Word 导出样式模板
 │   ├── template-en.tex       # 纯英文模板
-│   ├── template-cn.tex       # 纯中文模板
-│   └── template-mixed.tex    # 中英混排模板
+│   └── template-cn.tex       # 纯中文模板
 │
 └── typst/                    # Typst 版本
     ├── manuscript.typ        # 样式文件
     ├── references.bib        # 参考文献数据库
     ├── template-en.typ       # 纯英文模板
-    ├── template-cn.typ       # 纯中文模板
-    └── template-mixed.typ    # 中英混排模板
+    └── template-cn.typ       # 纯中文模板
 ```
 
 ## LaTeX 版本
@@ -26,10 +25,14 @@ XeLaTeX / Typst 学术论文模板（初稿），支持中英混排
 
 ```bash
 cd latex
-xelatex template-en.tex
+make template-cn          # 编译 template-cn.tex → template-cn.pdf
+make template-en.pdf      # 同上（显式指定扩展名）
+make fast FILE=xxx        # 快速编译（只运行一次 xelatex）
 ```
 
-### Word 导出（一键转换）
+编译流程：`xelatex → biber → xelatex → xelatex`
+
+### Word 导出
 
 本模板支持使用 Pandoc 将 LaTeX 一键导出为 Word，**固定格式、保留参考文献、使用 Word 原生公式**。
 
@@ -41,16 +44,21 @@ brew install pandoc
 **快速导出**：
 ```bash
 cd latex
-make word-cn    # 导出中文模板
-make word-en    # 导出英文模板
+make template-cn.docx     # 导出中文模板
+make template-en.docx     # 导出英文模板
+```
+
+**自定义模板**：
+```bash
+make template-cn.docx TEMPLATE=mytemplate.docx  # 使用指定模板
 ```
 
 **固定格式配置**（推荐）：
 
 1. 用 Microsoft Word 打开 `latex/wordTemplate.docx`
 2. 修改样式（字体、字号、行距、段落间距等）
-3. 另存为 `latex/wordTemplate.docx`
-4. 运行 `make word-cn`，导出的 Word 将自动应用预设样式
+3. 保存文件
+4. 运行 `make template-cn.docx`，导出的 Word 将自动应用预设样式
 
 **特性**：
 - ✅ 参考文献自动处理（`--citeproc`）
@@ -60,9 +68,15 @@ make word-en    # 导出英文模板
 
 **更多选项**：
 ```bash
-make word-basic-cn   # 基础导出（无自定义样式）
-make ref-doc         # 生成默认样式模板
-make help            # 查看所有命令
+make word-basic FILE=xxx [OUT=yyy]  # 基础导出（无自定义样式）
+make help                            # 查看所有命令
+```
+
+### 清理
+
+```bash
+make clean       # 清理辅助文件（保留 PDF、Word）
+make distclean   # 彻底清理（保留模板文件 wordTemplate.docx）
 ```
 
 ### 文档类选项
@@ -91,9 +105,8 @@ typst compile template-en.typ
 
 - **数学快捷命令**：`\R`, `\E`, `\Var`, `\norm{x}`, `\bmat{}`
 - **智能引用**：`\cref{eq:1}` → Eq. (1)
-- **单位排版**：`\SI{100}{\milli\second}`
 - **定理环境**：自动切换中英文
-- **参考文献**：支持 BibTeX/BibLaTeX
+- **参考文献**：BibLaTeX + biber 后端
 
 ## 反馈
 
