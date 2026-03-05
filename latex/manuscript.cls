@@ -510,6 +510,8 @@
 %%   - sortcites=true  : 同一引用点内排序
 %%   - maxnames=3      : 最多显示 3 个作者
 %%   - minnames=1      : 超过时显示 "et al."
+%%   - hyperref=true   : 启用引用超链接（点击跳转到参考文献）
+%%   - backref=true    : 在参考文献后显示引用页码反向链接
 %%
 %% 编译方式: xelatex -> biber -> xelatex -> xelatex
 %%
@@ -522,7 +524,7 @@
 %% 打印参考文献:
 %%   - \printbibliography : 打印参考文献列表
 %% ----------------------------------------------------------------------------
-\RequirePackage[backend=biber, style=numeric, sorting=none, sortcites=true, maxnames=3, minnames=1]{biblatex}
+\RequirePackage[backend=biber, style=numeric, sorting=none, sortcites=true, maxnames=3, minnames=1, hyperref=true, backref=true]{biblatex}
 
 %% ----------------------------------------------------------------------------
 %% 单位排版
